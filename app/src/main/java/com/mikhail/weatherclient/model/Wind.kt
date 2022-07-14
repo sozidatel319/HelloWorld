@@ -1,31 +1,19 @@
-package com.mikhail.weatherclient.model;
+package com.mikhail.weatherclient.model
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
+import com.google.gson.annotations.Expose
 
-public class Wind {
-
-    @SerializedName("speed")
-    @Expose
-    private Double speed;
+data class Wind(
+    //  public Integer getDeg() {
     //@SerializedName("deg")
     //@Expose
     //private Integer deg;
-
-    public Double getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(Double speed) {
-        this.speed = speed;
-    }
-
-  //  public Integer getDeg() {
-  //      return deg;
-  //  }
-
-  //  public void setDeg(Integer deg) {
-  //      this.deg = deg;
-  //  }
-
-}
+    @SerializedName("speed")
+    @Expose
+    var speed: Double? = null
+    //      return deg;
+    //  }
+    //  public void setDeg(Integer deg) {
+    //      this.deg = deg;
+    //  }
+)

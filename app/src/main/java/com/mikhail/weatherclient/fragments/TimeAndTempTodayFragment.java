@@ -118,6 +118,7 @@ public class TimeAndTempTodayFragment extends Fragment implements WeatherProvide
         WeatherProvider.getInstance().removeListener(this);
     }
 
+    @Override
     public void updateWeather(WeatherModel model, ArrayList<String> nexttime) {
         if (model == null) {
             Intent intent = new Intent(getActivity(), ErrorActivity.class);

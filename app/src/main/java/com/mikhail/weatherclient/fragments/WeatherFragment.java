@@ -67,7 +67,6 @@ public class WeatherFragment extends Fragment implements WeatherProviderListener
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         daysofweek = WeatherProvider.getInstance().getDays();
-        mintemptoweek = new String[5];
         mintemptoweek = new String[]{"--", "--", "--", "--", "--"};
         maxtempofweek = mintemptoweek;
         recyclerView.setAdapter(new DaysOfWeekAdapter(daysofweek, mintemptoweek, maxtempofweek));

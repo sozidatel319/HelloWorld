@@ -1,64 +1,23 @@
-package com.mikhail.weatherclient.model;
+package com.mikhail.weatherclient.model
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-public class Main {
+data class Main(
+    @Expose
+    var temp: Double = 0.0,
 
-    @SerializedName("temp")
     @Expose
-    private Double temp;
-    @SerializedName("pressure")
+    var pressure: Int = 0,
+
     @Expose
-    private Integer pressure;
-    @SerializedName("humidity")
+    var humidity: Int = 0,
+
     @Expose
-    private Integer humidity;
     @SerializedName("temp_min")
+    var tempMin: Double = 0.0,
+
     @Expose
-    private Double tempMin;
     @SerializedName("temp_max")
-    @Expose
-    private Double tempMax;
-
-    public Double getTemp() {
-        return temp;
-    }
-
-    public void setTemp(Double temp) {
-        this.temp = temp;
-    }
-
-    public Integer getPressure() {
-        return pressure;
-    }
-
-    public void setPressure(Integer pressure) {
-        this.pressure = pressure;
-    }
-
-    public Integer getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(Integer humidity) {
-        this.humidity = humidity;
-    }
-
-    public Double getTempMin() {
-        return tempMin;
-    }
-
-    public void setTempMin(Double tempMin) {
-        this.tempMin = tempMin;
-    }
-
-    public Double getTempMax() {
-        return tempMax;
-    }
-
-    public void setTempMax(Double tempMax) {
-        this.tempMax = tempMax;
-    }
-
-}
+    var tempMax: Double = 0.0
+)

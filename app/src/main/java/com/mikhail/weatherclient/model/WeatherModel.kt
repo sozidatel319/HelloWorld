@@ -1,49 +1,8 @@
+package com.mikhail.weatherclient.model
 
-package com.mikhail.weatherclient.model;
+import com.google.gson.annotations.Expose
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-public class WeatherModel {
-    @SerializedName("list")
-    @Expose
-    private java.util.List<com.mikhail.weatherclient.model.List> list = null;
-    //@SerializedName("coord")
-    //@Expose
-    //private Coord coord;
-    //@SerializedName("weather")
-    //@Expose
-    // private List<Weather> weather = null;
-    //@SerializedName("base")
-    //@Expose
-    //private String base;
-    @SerializedName("main")
-    @Expose
-    private Main main;
-    // @SerializedName("visibility")
-    //@Expose
-    //  private Integer visibility;
-    @SerializedName("wind")
-    @Expose
-    private Wind wind;
-    @SerializedName("clouds")
-    @Expose
-    private Clouds clouds;
-    @SerializedName("dt")
-    @Expose
-    private Integer dt;
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    @SerializedName("city")
-    @Expose
-    private City city;
+data class WeatherModel(
     //@SerializedName("sys")
     // @Expose
     // private Sys sys;
@@ -59,53 +18,87 @@ public class WeatherModel {
     //  @SerializedName("cod")
     // @Expose
     //  private Integer cod;
-
     /*public Coord getCoord() {
-        return coord;
+              return coord;
+          }
+      
+          public void setCoord(Coord coord) {
+              this.coord = coord;
+          }
+          public java.util.List<com.example.helloworld.model.List> getList() {
+          return list;
+          }
+      
+          public void setList(java.util.List<com.example.helloworld.model.List> list) {
+          this.list = list;
+          }
+          public List<Weather> getWeather() {
+              return weather;
+          }
+      
+          public void setWeather(List<Weather> weather) {
+              this.weather = weather;
+          }
+      
+          public String getBase() {
+              return base;
+          }
+      
+          public void setBase(String base) {
+              this.base = base;
+          }*/
+    @Expose
+    var list: List<WeatherList>? = ArrayList(),
+
+    //@SerializedName("coord")
+    //@Expose
+    //private Coord coord;
+    //@SerializedName("weather")
+    //@Expose
+    // private List<Weather> weather = null;
+    //@SerializedName("base")
+    //@Expose
+    //private String base;
+    @Expose
+    private var main: Main? = null,
+
+    // @SerializedName("visibility")
+    //@Expose
+    //  private Integer visibility;
+    @Expose
+    private var wind: Wind? = null,
+
+    @Expose
+    private var clouds: Clouds? = null,
+
+    @Expose
+    private var dt: Int? = null)
+{
+
+    fun getCity(): City? {
+        return city
     }
 
-    public void setCoord(Coord coord) {
-        this.coord = coord;
-    }
-    public java.util.List<com.example.helloworld.model.List> getList() {
-    return list;
+    fun setCity(city: City?) {
+        this.city = city
     }
 
-    public void setList(java.util.List<com.example.helloworld.model.List> list) {
-    this.list = list;
-    }
-    public List<Weather> getWeather() {
-        return weather;
-    }
+    @Expose
+    private var city: City? = null
 
-    public void setWeather(List<Weather> weather) {
-        this.weather = weather;
-    }
-
-    public String getBase() {
-        return base;
-    }
-
-    public void setBase(String base) {
-        this.base = base;
+    /*fun setList(list: kotlin.collections.List<List>?) {
+        field = list
     }*/
 
-    public java.util.List<com.mikhail.weatherclient.model.List> getList() {
-        return list;
+    fun getMain(): Main? {
+        return main
     }
 
-    public void setList(java.util.List<com.mikhail.weatherclient.model.List> list) {
-        this.list = list;
+    fun setMain(main: Main?) {
+        this.main = main
     }
 
-    public Main getMain() {
-        return main;
-    }
-
-    public void setMain(Main main) {
-        this.main = main;
-    }
-/*
+    /*
 
     public Integer getVisibility() {
         return visibility;
@@ -115,32 +108,29 @@ public class WeatherModel {
         this.visibility = visibility;
     }
 */
-
-    public Wind getWind() {
-        return wind;
+    fun getWind(): Wind? {
+        return wind
     }
 
-    public void setWind(Wind wind) {
-        this.wind = wind;
+    fun setWind(wind: Wind?) {
+        this.wind = wind
     }
 
-
-    public Clouds getClouds() {
-        return clouds;
+    fun getClouds(): Clouds? {
+        return clouds
     }
 
-    public void setClouds(Clouds clouds) {
-        this.clouds = clouds;
+    fun setClouds(clouds: Clouds?) {
+        this.clouds = clouds
     }
 
-    public Integer getDt() {
-        return dt;
+    fun getDt(): Int? {
+        return dt
     }
 
-    public void setDt(Integer dt) {
-        this.dt = dt;
-    }
-/*
+    fun setDt(dt: Int?) {
+        this.dt = dt
+    } /*
     public Sys getSys() {
         return sys;
     }
@@ -181,5 +171,4 @@ public class WeatherModel {
         this.cod = cod;
     }
 */
-
 }

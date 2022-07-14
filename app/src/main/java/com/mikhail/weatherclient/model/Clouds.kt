@@ -1,20 +1,7 @@
-package com.mikhail.weatherclient.model;
+package com.mikhail.weatherclient.model
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose
 
-public class Clouds {
-
-    @SerializedName("all")
+data class Clouds (
     @Expose
-    private Integer all;
-
-    public Integer getAll() {
-        return all;
-    }
-
-    public void setAll(Integer all) {
-        this.all = all;
-    }
-
-}
+    var all: Int? = null)

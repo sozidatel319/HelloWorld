@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorPrimary"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/selectcity"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="30sp"
+        android:gravity="center"
+        android:text="@string/select_city"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="24sp"></TextView>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputcity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:hint="@string/enterCityName"
+            android:inputType="textPersonName"
+            android:textColor="@color/textColorPrimary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.mikhail.weatherclient.fragments.CityFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_city" />
+
+    <Switch
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:checked="false"
+        android:paddingTop="30dp"
+        android:splitTrack="false"
+        android:text="@string/info"
+        android:textAlignment="center"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="14sp"
+        tools:checked="false" />
+
+    <Switch
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:checked="false"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:splitTrack="false"
+        android:text="@string/location"
+        android:textAlignment="center"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="14sp"
+        tools:checked="false" />
+
+
+    <Button
+        android:id="@+id/savecity"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/save_changes"
+        android:textAlignment="center"
+        android:textColor="@color/textColorPrimary" />
+
+</LinearLayout>

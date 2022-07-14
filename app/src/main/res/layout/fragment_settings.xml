@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.WeatherFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/colorPrimary"
+    android:gravity="top"
+    android:orientation="vertical">
+
+    <Switch
+        android:id="@+id/themecolor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="@string/theme"
+        android:textAlignment="center"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/unitofmeasure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/C_F"
+        android:textAlignment="center"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="18sp" />
+</LinearLayout>

@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name" translatable="false">My weather</string>
+    <string name="mainpicture">mainpicture</string>
+    <string-array name="cities">
+        <item>Yessentuki</item>
+        <item>Moscow</item>
+        <item>Pyatigorsk</item>
+        <item>Saint-Peterburg</item>
+    </string-array>
+    <string name="weather">Clouds</string>
+    <string name="enterCityName">Введите название города</string>
+    <string name="select_city">Выберите город</string>
+    <string name="menuSelectcity">Выбрать город</string>
+    <string name="aboutCity">Узнать о городе</string>
+    <string name="Pyatigorsk">Pyatigorsk</string>
+    <string name="Yessentuki">Yessentuki</string>
+    <string name="Moscow">Moscow</string>
+    <string name="St_P">Saint Petersburg</string>
+    <string name="gradus_forengheit">--</string>
+    <string name="forengheight">90F</string>
+    <string name="sunday">Воскресенье</string>
+    <string name="info">Информация о скорости ветра и давлении   </string>
+    <string name="settings">Настройки</string>
+    <string name="theme">Тема Светлая/Темная</string>
+    <string name="font">Шрифт Нормальный/Крупный</string>
+    <string name="C_F">Температура в Цельсиях/Форенгейт</string>
+    <string name="sunny">sunny</string>
+    <string name="_3">-3</string>
+    <string name="_10">10</string>
+    <string name="_0">0</string>
+    <string name="_2">-2</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_5">5</string>
+    <string name="_1">-1</string>
+    <string name="_m2">2</string>
+    <string name="save_changes">OK</string>
+    <string name="aboutcity">About City</string>
+    <string name="cityinputerror">Cityname error</string>
+    <string name="savesettins">Сохранить настройки?</string>
+    <string name="now">now</string>
+    <string name="location">Use location</string>
+    <string name="Wind">Wind</string>
+    <string name="meters_per_second">m/c</string>
+    <string name="pressure">Pressure</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/MaterialLightBlue800</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/BlueAccent100</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColor">@color/Black</item>
+
+    </style>
+
+    <style name="AppThemeDark" parent="@style/Theme.MaterialComponents">
+        <item name="android:colorPrimary">@color/Black</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/MaterialIndigo900</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+</resources>

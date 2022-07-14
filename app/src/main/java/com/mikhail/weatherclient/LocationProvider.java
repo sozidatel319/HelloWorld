@@ -90,6 +90,7 @@ public class LocationProvider {
                 },
                 Looper.myLooper());
     }*/
+    }
 
     public void requestLocationPermissions() {
         if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CALL_PHONE)) {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mainpicture">Основная картинка</string>
+    <string name="weather">Облачность</string>
+    <string name="enterCityName">Введите название города</string>
+    <string name="select_city">Выберите город</string>
+    <string name="menuSelectcity">Выбрать город</string>
+    <string name="aboutCity">Узнать о городе</string>
+    <string name="Pyatigorsk">Пятигорск</string>
+    <string name="Yessentuki">Ессентуки</string>
+    <string name="Moscow">Москва</string>
+    <string name="St_P">Санкт-Петербург</string>
+    <string name="gradus_forengheit">--</string>
+    <string name="forengheight">90F</string>
+    <string name="sunday">Воскресенье</string>
+    <string name="info">Информация о скорости ветра и давлении  </string>
+    <string name="settings">Настройки</string>
+    <string name="theme">Тема Светлая/Темная</string>
+    <string name="font">Шрифт Нормальный/Крупный</string>
+    <string name="C_F">Температура в Цельсиях/Форенгейт</string>
+    <string name="sunny">sunny</string>
+    <string name="_3">-3</string>
+    <string name="_10">10</string>
+    <string name="_0">0</string>
+    <string name="_2">-2</string>
+    <string name="_7">7</string>
+    <string name="_8">2</string>
+    <string name="_5">5</string>
+    <string name="_1">-1</string>
+    <string name="_m2">2</string>
+    <string-array name="cities">
+        <item>Ессентуки</item>
+        <item>Москва</item>
+        <item>Пятигорск</item>
+        <item>Санкт Петербург</item>
+    </string-array>
+    <string name="save_changes">Сохранить настройки</string>
+    <string name="aboutcity">Узнать о городе</string>
+    <string name="cityinputerror">В названии города допущены ошибки</string>
+    <string name="savesettins">Сохранить настройки?</string>
+    <string name="now">Сейчас</string>
+    <string name="location">Использовать местонахождение</string>
+    <string name="Wind">Ветер</string>
+    <string name="meters_per_second">м/с</string>
+    <string name="pressure">Давление</string>
+</resources>

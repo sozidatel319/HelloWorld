@@ -10,7 +10,7 @@ data class Wind(
     //private Integer deg;
     @SerializedName("speed")
     @Expose
-    var speed: Double? = null
+    var speed: Double
     //      return deg;
     //  }
     //  public void setDeg(Integer deg) {

@@ -1,4 +1,4 @@
-package com.mikhail.weatherclient;
+package com.mikhail.weatherclient.presentation;
 
 public final class City_changerPresenter {
     private String cityName;

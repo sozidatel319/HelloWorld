@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.mikhail.weatherclient.fragments.SettingsFragment"
+        android:name="com.mikhail.weatherclient.presentation.fragments.SettingsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_settings" />

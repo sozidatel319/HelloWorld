@@ -1,4 +1,4 @@
-package com.mikhail.weatherclient.fragments;
+package com.mikhail.weatherclient.presentation.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mikhail.weatherclient.ErrorActivity;
+import com.mikhail.weatherclient.presentation.ErrorActivity;
 import com.mikhail.weatherclient.R;
 import com.mikhail.weatherclient.SettingsPresenter;
 import com.mikhail.weatherclient.WeatherProvider;

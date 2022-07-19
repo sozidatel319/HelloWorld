@@ -1,11 +1,13 @@
-package com.mikhail.weatherclient;
+package com.mikhail.weatherclient.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ErrorActivity extends BaseActivity{
+import com.mikhail.weatherclient.R;
+
+public class ErrorActivity extends BaseActivity {
     Button error;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +18,7 @@ public class ErrorActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 City_changerPresenter.getInstance().setOpened(true);
-                Intent intent = new Intent(ErrorActivity.this,CityChangerActivity.class);
+                Intent intent = new Intent(ErrorActivity.this, CityChangerActivity.class);
                 startActivity(intent);
                 finish();
             }

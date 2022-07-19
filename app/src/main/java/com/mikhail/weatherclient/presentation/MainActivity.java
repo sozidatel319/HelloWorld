@@ -1,4 +1,4 @@
-package com.mikhail.weatherclient;
+package com.mikhail.weatherclient.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,6 +7,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.mikhail.weatherclient.Constants;
+import com.mikhail.weatherclient.LocationProvider;
+import com.mikhail.weatherclient.PreferenceWrapper;
+import com.mikhail.weatherclient.R;
+import com.mikhail.weatherclient.SettingsPresenter;
+import com.mikhail.weatherclient.WeatherProvider;
+import com.mikhail.weatherclient.presentation.viewmodel.WeatherViewModel;
 
 public class MainActivity extends BaseActivity {
     boolean first = true;
@@ -74,8 +82,8 @@ public class MainActivity extends BaseActivity {
         if (resultCode != RESULT_OK) {
             return;
         }
-        android.app.Fragment weathertodayfragment = getFragmentManager().findFragmentById(R.id.weathertodayfragment);
-        weathertodayfragment.onActivityResult(requestCode, resultCode, data);
+       // android.app.Fragment weathertodayfragment = getFragmentManager().findFragmentById(R.id.weathertodayfragment);
+      //  weathertodayfragment.onActivityResult(requestCode, resultCode, data);
         recreate();
     }
 

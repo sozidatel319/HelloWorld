@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.mikhail.weatherclient.fragments.CityFragment"
+        android:name="com.mikhail.weatherclient.presentation.fragments.CityFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_city" />

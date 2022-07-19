@@ -48,7 +48,7 @@ data class WeatherModel(
               this.base = base;
           }*/
     @Expose
-    var list: List<WeatherList>? = ArrayList(),
+    var list: List<WeatherList> = ArrayList(),
 
     //@SerializedName("coord")
     //@Expose
@@ -72,103 +72,10 @@ data class WeatherModel(
     private var clouds: Clouds? = null,
 
     @Expose
-    private var dt: Int? = null)
-{
+    private var dt: Int? = null,
 
-    fun getCity(): City? {
-        return city
-    }
+    @Expose var city: City,
 
-    fun setCity(city: City?) {
-        this.city = city
-    }
+   // val country
+)
 
-    @Expose
-    private var city: City? = null
-
-    /*fun setList(list: kotlin.collections.List<List>?) {
-        field = list
-    }*/
-
-    fun getMain(): Main? {
-        return main
-    }
-
-    fun setMain(main: Main?) {
-        this.main = main
-    }
-
-    /*
-
-    public Integer getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(Integer visibility) {
-        this.visibility = visibility;
-    }
-*/
-    fun getWind(): Wind? {
-        return wind
-    }
-
-    fun setWind(wind: Wind?) {
-        this.wind = wind
-    }
-
-    fun getClouds(): Clouds? {
-        return clouds
-    }
-
-    fun setClouds(clouds: Clouds?) {
-        this.clouds = clouds
-    }
-
-    fun getDt(): Int? {
-        return dt
-    }
-
-    fun setDt(dt: Int?) {
-        this.dt = dt
-    } /*
-    public Sys getSys() {
-        return sys;
-    }
-
-    public void setSys(Sys sys) {
-        this.sys = sys;
-    }
-
-    public Integer getTimezone() {
-        return timezone;
-    }
-
-    public void setTimezone(Integer timezone) {
-        this.timezone = timezone;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getCod() {
-        return cod;
-    }
-
-    public void setCod(Integer cod) {
-        this.cod = cod;
-    }
-*/
-}

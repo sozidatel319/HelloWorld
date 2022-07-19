@@ -1,4 +1,4 @@
-package com.mikhail.weatherclient;
+package com.mikhail.weatherclient.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -11,8 +11,14 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.mikhail.weatherclient.fragments.WeatherTodayFragment;
+import com.mikhail.weatherclient.Constants;
+import com.mikhail.weatherclient.LocationProvider;
+import com.mikhail.weatherclient.PreferenceWrapper;
+import com.mikhail.weatherclient.R;
+import com.mikhail.weatherclient.WeatherProvider;
 import com.google.android.material.textfield.TextInputEditText;
+import com.mikhail.weatherclient.presentation.fragments.WeatherTodayFragment;
+
 
 import java.util.Objects;
 import java.util.regex.Pattern;

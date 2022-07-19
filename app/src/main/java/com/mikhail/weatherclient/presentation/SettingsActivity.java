@@ -1,4 +1,4 @@
-package com.mikhail.weatherclient;
+package com.mikhail.weatherclient.presentation;
 
 import androidx.annotation.NonNull;
 
@@ -10,6 +10,10 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.mikhail.weatherclient.Constants;
+import com.mikhail.weatherclient.PreferenceWrapper;
+import com.mikhail.weatherclient.R;
+import com.mikhail.weatherclient.SettingsPresenter;
 
 
 public class SettingsActivity extends BaseActivity {

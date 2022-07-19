@@ -4,4 +4,4 @@ import com.google.gson.annotations.Expose
 
 data class Clouds (
     @Expose
-    var all: Int? = null)
+    var all: Int)

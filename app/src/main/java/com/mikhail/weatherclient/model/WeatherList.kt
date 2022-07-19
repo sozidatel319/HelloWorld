@@ -6,11 +6,11 @@ import com.google.gson.annotations.Expose
 data class WeatherList(
     @SerializedName("dt")
     @Expose
-    var dt: Int? = null,
+    var dt: Int,
 
     @SerializedName("main")
     @Expose
-    var main: Main? = null,
+    var main: Main,
 
     /* public java.util.List<Weather> getWeather() {
           return weather;
@@ -23,10 +23,10 @@ data class WeatherList(
     //    @Expose
     //  private java.util.List<Weather> weather = null;
     @Expose
-    var clouds: Clouds? = null,
+    var clouds: Clouds,
 
     @Expose
-    var wind: Wind? = null,
+    var wind: Wind,
 
     /* @SerializedName("snow")
       @Expose
@@ -36,5 +36,5 @@ data class WeatherList(
       private Sys sys;*/
     @SerializedName("dt_txt")
     @Expose
-    var dtTxt: String? = null
+    var dtTxt: String
 )

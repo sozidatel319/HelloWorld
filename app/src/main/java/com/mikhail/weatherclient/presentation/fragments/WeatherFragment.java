@@ -1,4 +1,4 @@
-package com.mikhail.weatherclient.fragments;
+package com.mikhail.weatherclient.presentation.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mikhail.weatherclient.DaysOfWeekAdapter;
+import com.mikhail.weatherclient.presentation.adapters.DaysOfWeekAdapter;
 import com.mikhail.weatherclient.R;
 import com.mikhail.weatherclient.SettingsPresenter;
 import com.mikhail.weatherclient.WeatherProvider;
 import com.mikhail.weatherclient.WeatherProviderListener;
 import com.mikhail.weatherclient.model.WeatherModel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -79,7 +80,7 @@ public class WeatherFragment extends Fragment implements WeatherProviderListener
             if (!SettingsPresenter.getInstance().getUnitofmeasure()) {
                 mintemptoweek = WeatherProvider.getInstance().tempMinToWeekInCelsius();
                 maxtempofweek = WeatherProvider.getInstance().tempMaxToWeekInCelsius();
-            }else {
+            } else {
                 mintemptoweek = WeatherProvider.getInstance().tempMinToWeekInFahrenheit();
                 maxtempofweek = WeatherProvider.getInstance().tempMaxToWeekInFahrenheit();
             }

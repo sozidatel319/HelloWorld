@@ -49,11 +49,12 @@ public class WeatherService extends Service {
 
     private WeatherModel getWeather(String cityname) throws Exception {
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://api.openweathermap.org").
-                addConverterFactory(GsonConverterFactory.create()).build();
-        Call <WeatherModel> call = retrofit.create(OpenWeather.class).getWeather(cityname + ",ru", "0507febdbdf6a636ec6bdcdfe0b909fc");
+                addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Call<WeatherModel> call = retrofit.create(OpenWeather.class).getWeather(cityname + ",ru", "0507febdbdf6a636ec6bdcdfe0b909fc");
         Response<WeatherModel> response = call.execute();
-        if (response.isSuccessful())return response.body();
-        else throw new Exception(response.errorBody().string(),null);
+        if (response.isSuccessful()) return response.body();
+        else throw new Exception(response.errorBody().string(), null);
     }
 
     @Nullable

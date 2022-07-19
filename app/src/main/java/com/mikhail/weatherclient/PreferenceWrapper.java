@@ -1,6 +1,5 @@
 package com.mikhail.weatherclient;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -8,13 +7,13 @@ public class PreferenceWrapper {
     private static PreferenceWrapper instance;
     private SharedPreferences sharedPreferences;
 
-    public static PreferenceWrapper getPreference(Activity activity) {
-        instance = instance == null ? new PreferenceWrapper(activity) : instance;
+    public static PreferenceWrapper getPreference(Context context) {
+        instance = instance == null ? new PreferenceWrapper(context) : instance;
         return instance;
     }
 
-    PreferenceWrapper(Activity activity) {
-        sharedPreferences = activity.getSharedPreferences("now", Context.MODE_PRIVATE);
+    PreferenceWrapper(Context context) {
+        sharedPreferences = context.getSharedPreferences("now", Context.MODE_PRIVATE);
         //City_changerPresenter.getInstance().setCityName(sharedPreferences.getString(Constants.CITY_NAME,"Moscow"));
     }
 

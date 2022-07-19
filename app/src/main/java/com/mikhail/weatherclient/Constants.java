@@ -21,6 +21,7 @@ public class Constants extends AppCompatActivity {
     public static final int SETTINGS_CODE = 90;
     public static final String CELSIUS = "°C";
     public static final String FAHRENHEIT = "°F";
+    public static final int MAXIMUM_DAYS_IN_LIST = 6;
 
     public static void logAndToast(String text, String tag){
         Activity activity = new Activity();

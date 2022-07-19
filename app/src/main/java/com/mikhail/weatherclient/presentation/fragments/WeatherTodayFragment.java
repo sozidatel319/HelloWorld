@@ -1,4 +1,4 @@
-package com.mikhail.weatherclient.fragments;
+package com.mikhail.weatherclient.presentation.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
-import com.mikhail.weatherclient.City_changerPresenter;
+import com.mikhail.weatherclient.presentation.City_changerPresenter;
 import com.mikhail.weatherclient.Constants;
-import com.mikhail.weatherclient.ErrorActivity;
+import com.mikhail.weatherclient.presentation.ErrorActivity;
 import com.mikhail.weatherclient.PreferenceWrapper;
 import com.mikhail.weatherclient.R;
 import com.mikhail.weatherclient.SettingsPresenter;
@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 

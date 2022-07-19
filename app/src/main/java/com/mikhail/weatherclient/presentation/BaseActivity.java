@@ -1,9 +1,11 @@
-package com.mikhail.weatherclient;
+package com.mikhail.weatherclient.presentation;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.mikhail.weatherclient.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

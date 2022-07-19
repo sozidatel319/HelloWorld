@@ -5,23 +5,23 @@ import com.google.gson.annotations.Expose
 data class City(
 
 @Expose
-private var id: Int? = null,
+val id: Int? = null,
 
 @Expose
-private val name: String? = null,
+val name: String,
 
 @Expose
-private val coord: Coord? = null,
+val coord: Coord? = null,
 
 @Expose
-private val country: String? = null,
+val country: String? = null,
 
 @Expose
-private val timezone: Int? = null,
+val timezone: Int? = null,
 
 @Expose
-private val sunrise: Int? = null,
+val sunrise: Int? = null,
 
 @Expose
-private val sunset: Int? = null
+val sunset: Int? = null
 )

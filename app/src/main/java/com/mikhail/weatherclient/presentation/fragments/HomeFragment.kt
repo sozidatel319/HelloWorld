@@ -19,7 +19,7 @@ import com.mikhail.weatherclient.presentation.adapters.DailyAdapter
 import com.mikhail.weatherclient.presentation.adapters.DaysOfWeekAdapter
 import com.mikhail.weatherclient.presentation.viewmodel.WeatherViewModel
 
-class MainFragment : Fragment() {
+class HomeFragment : Fragment() {
     private lateinit var weeklyRecyclerView: RecyclerView
     private lateinit var dailyRecyclerView: RecyclerView
     private lateinit var daysofweek: Array<String?>
@@ -46,7 +46,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -1,135 +1,132 @@
-package com.mikhail.weatherclient.presentation;
+package com.mikhail.weatherclient.presentation
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.mikhail.weatherclient.Constants
+import com.mikhail.weatherclient.LocationProvider
+import com.mikhail.weatherclient.PreferenceWrapper
+import com.mikhail.weatherclient.R
+import com.mikhail.weatherclient.WeatherProvider.Companion.instance
+import com.mikhail.weatherclient.presentation.fragments.CityChangerFragment
+import com.mikhail.weatherclient.presentation.fragments.SettingsFragment
+import com.mikhail.weatherclient.presentation.viewmodel.MainViewModel
 
-import com.mikhail.weatherclient.Constants;
-import com.mikhail.weatherclient.LocationProvider;
-import com.mikhail.weatherclient.PreferenceWrapper;
-import com.mikhail.weatherclient.R;
-import com.mikhail.weatherclient.SettingsPresenter;
-import com.mikhail.weatherclient.WeatherProvider;
-import com.mikhail.weatherclient.presentation.viewmodel.WeatherViewModel;
+class MainActivity : BaseActivity() {
+    var first = true
+    var use_location = false
 
-public class MainActivity extends BaseActivity {
-    boolean first = true;
-    boolean use_location;
+    private lateinit var mainViewModel: MainViewModel
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        SettingsPresenter.getInstance().setUnitofmeasure(PreferenceWrapper.getPreference(this).getBoolean(Constants.UNIT_OF_MEASURE_FAHRENHEIT, false));
-        City_changerPresenter.getInstance().setCityName(PreferenceWrapper.getPreference(this).getString(Constants.CITY_NAME, getString(R.string.Moscow)));
-        City_changerPresenter.getInstance().setUseloctation(PreferenceWrapper.getPreference(this).getBoolean(Constants.USE_LOCATION, false));
-        initUseLocation();
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mainViewModel.getTheme()
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!first) {
-            initUseLocation();
+        mainViewModel.isDarkThemeLiveData.observeForever {
+            if (it) {
+                setTheme(R.style.AppThemeDark)
+            } else {
+                setTheme(R.style.AppTheme)
+            }
         }
-        first = false;
+
+        setContentView(R.layout.activity_main)
+
+
+
+        City_changerPresenter.getInstance().cityName = PreferenceWrapper.getPreference(this)
+            .getString(Constants.CITY_NAME, getString(R.string.Moscow))
+        City_changerPresenter.getInstance().isUseloctation = PreferenceWrapper.getPreference(this)
+            .getBoolean(Constants.USE_LOCATION, false)
+        // initUseLocation();
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!first) {
+            initUseLocation()
+        }
+        first = false
 
         //Intent service = new Intent(this,WeatherService.class);
         //service.putExtra(Constants.CITY_NAME,City_changerPresenter.getInstance().getCityName());
         //startService(service);
-        if (City_changerPresenter.getInstance().getMistake() == 1) {
-            Intent intent = new Intent(this, ErrorActivity.class);
-            startActivity(intent);
-        }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    override fun onPause() {
+        super.onPause()
         if (use_location) {
-            LocationProvider.getInstance().turnOffLocaltionListener();
+            LocationProvider.getInstance().turnOffLocaltionListener()
         }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (resultCode != RESULT_OK) {
-            return;
+            return
         }
-       // android.app.Fragment weathertodayfragment = getFragmentManager().findFragmentById(R.id.weathertodayfragment);
-      //  weathertodayfragment.onActivityResult(requestCode, resultCode, data);
-        recreate();
+        //recreate();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_citychange:
-                startActivityForResult(new Intent(MainActivity.this, CityChangerActivity.class), Constants.CITYCHANGER_CODE);
-                break;
-            case R.id.menu_settings:
-                startActivityForResult(new Intent(MainActivity.this, SettingsActivity.class), Constants.SETTINGS_CODE);
-                break;
-            case R.id.menu_aboutcity:
-                String url = "https://ru.wikipedia.org/wiki/" + City_changerPresenter.getInstance().getCityName();
-                Uri uri = Uri.parse(url);
-                Intent browser = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(browser);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void initUseLocation() {
-        use_location = City_changerPresenter.getInstance().isUseloctation();
-        if (use_location) {
-            getLocation();
-        } else {
-            if (LocationProvider.getInstance() != null) {
-                LocationProvider.getInstance().turnOffLocaltionListener();
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val fragment: Fragment
+        when (item.itemId) {
+            R.id.menu_citychange -> {
+                fragment = CityChangerFragment()
+                supportFragmentManager
+                    .beginTransaction()
+                    .addToBackStack("CITY")
+                    .add(R.id.navHostFragmentRoot, fragment)
+                    .commit()
+            }
+            R.id.menu_settings -> {
+                fragment = SettingsFragment()
+                supportFragmentManager
+                    .beginTransaction()
+                    .addToBackStack("SETTINGS")
+                    .add(R.id.navHostFragmentRoot, fragment)
+                    .commit()
+            }
+            R.id.menu_aboutcity -> {
+                //TODO: вынести адрес в константу, а имя города брать из репозитория через viewModel и UseCase
+                val url =
+                    "https://ru.wikipedia.org/wiki/" + City_changerPresenter.getInstance().cityName
+                val uri = Uri.parse(url)
+                val browser = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(browser)
             }
         }
-        WeatherProvider.getInstance().setWeatherByCoords(use_location);
+        return super.onOptionsItemSelected(item)
     }
 
-    private void getLocation() {
-        LocationProvider.getLocationProvider(this);
-        if (!LocationProvider.getInstance().isHavePermission()) {
-            return;
+    private fun initUseLocation() {
+        use_location = City_changerPresenter.getInstance().isUseloctation
+        if (use_location) {
+            location
+        } else {
+            if (LocationProvider.getInstance() != null) {
+                LocationProvider.getInstance().turnOffLocaltionListener()
+            }
         }
-        LocationProvider.getInstance().requestLocationUpdates();
+        instance!!.setWeatherByCoords(use_location)
     }
-}
 
+    private val location: Unit
+        private get() {
+            LocationProvider.getLocationProvider(this)
+            if (!LocationProvider.getInstance().isHavePermission) {
+                return
+            }
+            LocationProvider.getInstance().requestLocationUpdates()
+        }
+}

@@ -11,10 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.mikhail.weatherclient.*
 import com.mikhail.weatherclient.Utils.days
-import com.mikhail.weatherclient.WeatherProvider.Companion.instance
 import com.mikhail.weatherclient.data.WeatherToWeek
-import com.mikhail.weatherclient.database.DataReader
-import com.mikhail.weatherclient.database.DataSource
 import com.mikhail.weatherclient.presentation.adapters.DailyAdapter
 import com.mikhail.weatherclient.presentation.adapters.DaysOfWeekAdapter
 import com.mikhail.weatherclient.presentation.viewmodel.WeatherViewModel
@@ -26,19 +23,15 @@ class HomeFragment : Fragment() {
     private lateinit var mintemptoweek: Array<String?>
     private lateinit var maxtempofweek: Array<String?>
 
-    private lateinit var cityName: TextView
-    private lateinit var pressuregroup: LinearLayout
-    private lateinit var pressure: TextView
-    private lateinit var windgroup: LinearLayout
-    private lateinit var wind: TextView
-    private lateinit var temperature_of_day: TextView
-    private lateinit var tempmeasure: TextView
-    private lateinit var clouds: TextView
-    private lateinit var today: TextView
-    private val dataSource: DataSource? = null
-    private val dataReader: DataReader? = null
-    var cel = true
-    private val city_in_db = false
+    private lateinit var cityNameTextView: TextView
+    private lateinit var pressureGroupLinearLayout: LinearLayout
+    private lateinit var pressureTextView: TextView
+    private lateinit var windGroupLinearLayout: LinearLayout
+    private lateinit var windTextView: TextView
+    private lateinit var temperatureOfDayTextView: TextView
+    private lateinit var tempMeasureTextView: TextView
+    private lateinit var cloudsTextView: TextView
+    private lateinit var todayTextView: TextView
 
     private lateinit var weatherViewModel: WeatherViewModel
 
@@ -52,49 +45,75 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         weatherViewModel =
-            ViewModelProvider(this).get(WeatherViewModel::class.java)
+            ViewModelProvider(this)[WeatherViewModel::class.java]
 
-        cityName = view.findViewById(R.id.city)
-        pressuregroup = view.findViewById(R.id.pressuregroup)
-        pressure = view.findViewById(R.id.pressure)
-        windgroup = view.findViewById(R.id.windgroup)
-        wind = view.findViewById(R.id.wind)
-        temperature_of_day = view.findViewById(R.id.temperatureOfDay)
-        tempmeasure = view.findViewById(R.id.tempmeasure)
+        iniViews(view)
 
-        if (!PreferenceWrapper.getPreference(activity)
-                .getBoolean(Constants.UNIT_OF_MEASURE_FAHRENHEIT, false)
-        ) {
-            tempmeasure.text = Constants.CELSIUS
-        } else {
-            tempmeasure.text = Constants.FAHRENHEIT
+        weatherViewModel.isFahrenheitLiveData.observe(viewLifecycleOwner) {
+
+            tempMeasureTextView.text = if (it) {
+                Constants.FAHRENHEIT
+            } else {
+                Constants.CELSIUS
+            }
         }
 
-        today = view.findViewById(R.id.today)
-        clouds = view.findViewById(R.id.clouds)
-        //cityName.text = City_changerPresenter.getInstance().cityName
-
-        if (PreferenceWrapper.getPreference(activity).getBoolean(Constants.INFO, false)) {
-            windgroup.visibility = View.VISIBLE
-            pressuregroup.visibility = View.VISIBLE
-        } else {
-            windgroup.visibility = View.GONE
-            pressuregroup.visibility = View.GONE
+        weatherViewModel.needToShowAdditionalInfo.observe(viewLifecycleOwner) { show ->
+            if (show) {
+                windGroupLinearLayout.visibility = View.VISIBLE
+                pressureGroupLinearLayout.visibility = View.VISIBLE
+            } else {
+                windGroupLinearLayout.visibility = View.GONE
+                pressureGroupLinearLayout.visibility = View.GONE
+            }
         }
 
-        weeklyRecyclerView = view.findViewById(R.id.weeklyRecyclerView)
-        dailyRecyclerView = view.findViewById(R.id.oneDayRecyclerView)
-
-        weatherViewModel.weatherLiveData.observe(this) {
+        weatherViewModel.weatherLiveData.observe(viewLifecycleOwner) {
             updateWeather(it)
         }
 
+        weatherViewModel.responseErrorLiveData.observe(viewLifecycleOwner) {
+            showError(it)
+        }
+
         initRecyclerView()
+
+        parentFragmentManager.setFragmentResultListener(
+            Constants.CITYCHANGER_CODE.toString(), this
+        ) { requestKey, result ->
+
+            if (requestKey == Constants.CITYCHANGER_CODE.toString()) {
+                if (result.getString(Constants.CITY_NAME) != null &&
+                    !result.getBoolean(
+                        Constants.USE_LOCATION,
+                        false
+                    )
+                ) {
+                    result.getString(Constants.CITY_NAME)?.let {
+                        weatherViewModel.getWeather(it)
+                    }
+                    cityNameTextView.text = result.getString(Constants.CITY_NAME)
+                }
+
+                if (result.getBoolean(Constants.INFO, false)) {
+
+                    pressureGroupLinearLayout.visibility = View.VISIBLE
+                    pressureTextView.text = result.getString(Constants.PRESSURE)
+                    windGroupLinearLayout.visibility = View.VISIBLE
+                    windTextView.text = result.getString(Constants.WIND_SPEED)
+
+                } else {
+
+                    pressureGroupLinearLayout.visibility = View.GONE
+                    windGroupLinearLayout.visibility = View.GONE
+                }
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        today.text = days(1).first()
+        todayTextView.text = days(1).first()
     }
 
     private fun initRecyclerView() {
@@ -111,37 +130,57 @@ class HomeFragment : Fragment() {
 
     private fun updateWeather(model: WeatherToWeek?) {
         if (model != null) {
-            // if (city_in_db) {
-            //  } else {
-            cityName.text = model.city
-            wind.text = model.firstDay.first().wind.toString()
-            pressure.text = model.firstDay.first().pressure.toString()
 
-            if (!SettingsPresenter.getInstance().unitofmeasure) {
-                temperature_of_day.text = model.firstDay.first().temp.toString()
-            } else {
-                temperature_of_day.text = instance!!.tempInFahrenheit(0)
-            }
-            clouds.text = model.firstDay.first().clouds.toString()
+            cityNameTextView.text = model.city
 
-            val s = instance
+            windTextView.text = model.firstDay.first().wind.toString()
+
+            pressureTextView.text = model.firstDay.first().pressure.toString()
+
+            temperatureOfDayTextView.text = model.firstDay.first().temp.toString()
+
+            cloudsTextView.text = model.firstDay.first().clouds.toString()
 
             daysofweek = days(model.weatherWeekList.size)
 
-            if (!SettingsPresenter.getInstance().unitofmeasure) {
-                mintemptoweek = model.weatherWeekList.withIndex().map {
-                    it.value.minTemp.toString()
-                }.toTypedArray()
-                maxtempofweek = model.weatherWeekList.withIndex().map {
-                    it.value.maxTemp.toString()
-                }.toTypedArray()
-            } else {
-                mintemptoweek = instance!!.tempMinToWeekInFahrenheit()
-                maxtempofweek = instance!!.tempMaxToWeekInFahrenheit()
-            }
+            mintemptoweek = model.weatherWeekList.withIndex().map {
+                it.value.minTemp.toString()
+            }.toTypedArray()
+            maxtempofweek = model.weatherWeekList.withIndex().map {
+                it.value.maxTemp.toString()
+            }.toTypedArray()
+
             weeklyRecyclerView.adapter = DaysOfWeekAdapter(daysofweek, mintemptoweek, maxtempofweek)
 
             dailyRecyclerView.adapter = DailyAdapter(model.firstDay)
         }
+    }
+
+    private fun showError(error: String) {
+        cityNameTextView.text = error
+    }
+
+    private fun iniViews(view: View) {
+        cityNameTextView = view.findViewById(R.id.city)
+
+        pressureGroupLinearLayout = view.findViewById(R.id.pressuregroup)
+
+        pressureTextView = view.findViewById(R.id.pressure)
+
+        windGroupLinearLayout = view.findViewById(R.id.windgroup)
+
+        windTextView = view.findViewById(R.id.wind)
+
+        temperatureOfDayTextView = view.findViewById(R.id.temperatureOfDay)
+
+        tempMeasureTextView = view.findViewById(R.id.tempMeasureTextView)
+
+        todayTextView = view.findViewById(R.id.today)
+
+        cloudsTextView = view.findViewById(R.id.clouds)
+
+        weeklyRecyclerView = view.findViewById(R.id.weeklyRecyclerView)
+
+        dailyRecyclerView = view.findViewById(R.id.oneDayRecyclerView)
     }
 }

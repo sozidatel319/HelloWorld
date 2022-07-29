@@ -1,5 +1,7 @@
 package com.mikhail.weatherclient.presentation;
 
+import static com.mikhail.weatherclient.Constants.THEME;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -18,11 +20,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (isDarkTheme()) {
-            setTheme(R.style.AppThemeDark);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
+
     }
 
     @Override
@@ -31,11 +29,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected boolean isDarkTheme() {
-        SharedPreferences sharedPref = getSharedPreferences(NameSharedPreference, MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(THEME, MODE_PRIVATE);
         return sharedPref.getBoolean(IsDarkTheme, false);
     }
-    protected void setDarkTheme(boolean isDarkTheme) {
-        SharedPreferences sharedPref = getSharedPreferences(NameSharedPreference, MODE_PRIVATE);
+    public void setDarkTheme(boolean isDarkTheme) {
+        SharedPreferences sharedPref = getSharedPreferences(THEME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(IsDarkTheme, isDarkTheme);
         editor.apply();

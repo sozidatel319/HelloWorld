@@ -19,15 +19,6 @@
     <string name="font">Шрифт Нормальный/Крупный</string>
     <string name="C_F">Температура в Цельсиях/Форенгейт</string>
     <string name="sunny">sunny</string>
-    <string name="_3">-3</string>
-    <string name="_10">10</string>
-    <string name="_0">0</string>
-    <string name="_2">-2</string>
-    <string name="_7">7</string>
-    <string name="_8">2</string>
-    <string name="_5">5</string>
-    <string name="_1">-1</string>
-    <string name="_m2">2</string>
     <string-array name="cities">
         <item>Ессентуки</item>
         <item>Москва</item>

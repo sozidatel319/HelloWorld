@@ -2,6 +2,7 @@ package com.mikhail.weatherclient.data.network.weatherapi
 
 import com.mikhail.weatherclient.BuildConfig
 import com.mikhail.weatherclient.model.WeatherModel
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -10,9 +11,9 @@ interface WeatherApiService {
     @GET("data/2.5/forecast")
     suspend fun getWeather(
         @Query("q") q: String?,
-        @Query("units") measure: String = "metric",
+        @Query("units") measure: String,
         @Query("appid") key: String = BuildConfig.THE_WEATHER_DATABASE_API
-    ): WeatherModel
+    ): Response<WeatherModel>
 
     @GET("data/2.5/forecast")
     suspend fun getWeatherByCoords(

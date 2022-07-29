@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_settings" />
 
     <Button
-        android:id="@+id/savesettings_button"
+        android:id="@+id/okButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -8,26 +8,26 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object RetrofitInstance {
 
-    private var INSTANCE: Retrofit? = null
+    private var INSTANCE: Retrofit
 
-
-    fun getInstance(): Retrofit = INSTANCE ?: kotlin.run {
+    init {
         val interceptor = HttpLoggingInterceptor()
-        val client = OkHttpClient()
-
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-        client
+        val client = OkHttpClient()
             .newBuilder()
             .addInterceptor(interceptor)
             .build()
 
-
-        Retrofit.Builder()
+        INSTANCE = Retrofit.Builder()
             .baseUrl("http://api.openweathermap.org")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(ScalarsConverterFactory.create())
             .build()
     }
+
+
+    fun getInstance(): Retrofit = INSTANCE
+
 }

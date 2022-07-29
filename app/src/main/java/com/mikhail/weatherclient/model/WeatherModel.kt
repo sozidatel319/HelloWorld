@@ -3,6 +3,8 @@ package com.mikhail.weatherclient.model
 import com.google.gson.annotations.Expose
 
 data class WeatherModel(
+    val cod: String,
+    val message: String,
     //@SerializedName("sys")
     // @Expose
     // private Sys sys;

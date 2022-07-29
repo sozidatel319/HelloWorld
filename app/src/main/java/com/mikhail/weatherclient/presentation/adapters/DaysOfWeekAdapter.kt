@@ -1,68 +1,53 @@
-package com.mikhail.weatherclient.presentation.adapters;
+package com.mikhail.weatherclient.presentation.adapters
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView
+import android.view.ViewGroup
+import android.view.LayoutInflater
+import android.view.View
+import com.mikhail.weatherclient.R
+import android.widget.TextView
 
-import com.mikhail.weatherclient.R;
-
-public class DaysOfWeekAdapter extends RecyclerView.Adapter<DaysOfWeekAdapter.ViewHolder> {
-
-    private String[] daysofweek;
-    private String[] mintempofweek;
-    private String[] maxtempofweek;
-
-    public DaysOfWeekAdapter(String[] daysofweek, String[] mintempofweek, String[] maxtempofweek) {
-        this.daysofweek = daysofweek;
-        this.mintempofweek = mintempofweek;
-        this.maxtempofweek = maxtempofweek;
+class DaysOfWeekAdapter(
+    private val daysOfWeek: Array<String?>,
+    private val minTempOfWeek: Array<String?>,
+    private val maxTempOfWeek: Array<String?>
+) : RecyclerView.Adapter<DaysOfWeekAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.dayofweek_item, parent, false)
+        )
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.dayofweek_item, parent, false));
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.setLabel(daysOfWeek[position])
+        holder.setMinTemp(minTempOfWeek[position])
+        holder.setMaxTemp(maxTempOfWeek[position])
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setLabel(daysofweek[position]);
-        holder.setMintemp(mintempofweek[position]);
-        holder.setMaxtemp(maxtempofweek[position]);
-
+    override fun getItemCount(): Int {
+        return daysOfWeek.size
     }
 
-    @Override
-    public int getItemCount() {
-        return daysofweek.length;
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView label;
-        TextView mintemp;
-        TextView maxtemp;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            label = itemView.findViewById(R.id.label);
-            mintemp = itemView.findViewById(R.id.mintemp);
-            maxtemp = itemView.findViewById(R.id.maxtemp);
-
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var label: TextView
+        var mintemp: TextView
+        var maxtemp: TextView
+        fun setLabel(text: String?) {
+            label.text = text
         }
 
-        void setLabel(String text) {
-            label.setText(text);
+        fun setMinTemp(text: String?) {
+            mintemp.text = text
         }
 
-        void setMintemp(String text) {
-            mintemp.setText(text);
+        fun setMaxTemp(text: String?) {
+            maxtemp.text = text
         }
 
-        void setMaxtemp(String text) {
-            maxtemp.setText(text);
+        init {
+            label = itemView.findViewById(R.id.label)
+            mintemp = itemView.findViewById(R.id.mintemp)
+            maxtemp = itemView.findViewById(R.id.maxtemp)
         }
     }
 }

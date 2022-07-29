@@ -63,7 +63,7 @@
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/tempmeasure"
+                android:id="@+id/tempMeasureTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:attr/textColorPrimary"

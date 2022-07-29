@@ -1,34 +1,31 @@
-package com.mikhail.weatherclient;
+package com.mikhail.weatherclient
 
-import android.app.Activity;
-import android.util.Log;
-import android.widget.Toast;
+import android.app.Activity
+import android.util.Log
+import android.widget.Toast
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class Constants extends AppCompatActivity {
-    public static final String CITY_NAME = "cityname";
-    public static final String INFO = "info";
-    public static final String PRESSURE = "pressure";
-    public static final String WIND_SPEED = "windspeed";
-    public static final String THEME = "theme";
-    public static final String LIGHT_THEME = "light_theme";
-    public static final String DARK_THEME = "dark_theme";
-    public static final String FONTSIZE = "fontsize";
-    public static final String UNIT_OF_MEASURE_FAHRENHEIT = "unitofmeasure";
-    public static final String USE_LOCATION = "use_location";
-    public static final int CITYCHANGER_CODE = 7;
-    public static final int SETTINGS_CODE = 90;
-    public static final String CELSIUS = "°C";
-    public static final String FAHRENHEIT = "°F";
-    public static final int MAXIMUM_DAYS_IN_LIST = 6;
-
-    public static void logAndToast(String text, String tag){
-        Activity activity = new Activity();
-        Log.d(tag, text);
-        Toast.makeText(activity.getApplicationContext(),text + "_" + tag, Toast.LENGTH_LONG).show();
+object Constants {
+    const val CITY_NAME = "cityname"
+    const val INFO = "info"
+    const val PRESSURE = "pressure"
+    const val WIND_SPEED = "windspeed"
+    const val THEME = "theme"
+    const val LIGHT_THEME = "light_theme"
+    const val DARK_THEME = "dark_theme"
+    const val FONTSIZE = "fontsize"
+    const val UNIT_OF_MEASURE_FAHRENHEIT = "unitofmeasure"
+    const val USE_LOCATION = "use_location"
+    const val CITYCHANGER_CODE = 7
+    const val SETTINGS_CODE = 90
+    const val CELSIUS = "°C"
+    const val FAHRENHEIT = "°F"
+    const val MAXIMUM_DAYS_IN_LIST = 6
+    const val RESPONSE_UNIT_OF_MEASURE_CELSIUS = "metric"
+    const val RESPONSE_UNIT_OF_MEASURE_FAHRENHEIT = "imperial"
+    const val MOSCOW = "MOSCOW"
+    fun logAndToast(text: String, tag: String) {
+        val activity = Activity()
+        Log.d(tag, text)
+        Toast.makeText(activity.applicationContext, text + "_" + tag, Toast.LENGTH_LONG).show()
     }
 }
-
-
-

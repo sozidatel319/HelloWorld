@@ -9,32 +9,10 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navHostFragmentRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.mikhail.weatherclient.presentation.fragments.HomeFragment"
         tools:ignore="FragmentTagUsage" />
-
-    <!--<fragment
-        android:id="@+id/weathertodayfragment"
-        android:tag="frament_weather_today"
-        android:name="com.mikhail.weatherclient.presentation.fragments.WeatherTodayFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        tools:layout="@layout/fragment_weather_today" />
-    <fragment
-        android:id="@+id/timeandtemptoday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.mikhail.weatherclient.presentation.fragments.TimeAndTempTodayFragment"
-        tools:layout="@layout/time_and_temp_today_fragment" />
-    <fragment
-        android:id="@+id/weatherfragment"
-        android:name="com.mikhail.weatherclient.presentation.fragments.WeatherFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        tools:layout="@layout/fragment_weather" />-->
 </LinearLayout>

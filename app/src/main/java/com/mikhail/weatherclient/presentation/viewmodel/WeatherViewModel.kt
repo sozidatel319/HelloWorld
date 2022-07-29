@@ -2,34 +2,54 @@ package com.mikhail.weatherclient.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mikhail.weatherclient.data.WeatherToWeek
 import com.mikhail.weatherclient.data.network.weatherapi.WeatherRepository
 import com.mikhail.weatherclient.data.network.weatherapi.WeatherRepositoryImpl
-import kotlinx.coroutines.runBlocking
+import com.mikhail.weatherclient.data.network.weatherapi.mappers.WeatherResult
+import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.launch
 
-class WeatherViewModel() : ViewModel() {
-
+class WeatherViewModel(
     private val weatherRepository: WeatherRepository = WeatherRepositoryImpl()
-    private val mutableLiveData:MutableLiveData<WeatherToWeek> = MutableLiveData()
-    val weatherLiveData: LiveData<WeatherToWeek> get() = mutableLiveData
+) : BaseViewModel() {
+
+    private val mutableWeatherToWeekLiveData: MutableLiveData<WeatherToWeek> = MutableLiveData()
+    private val mutableResponseErrorLiveData: MutableLiveData<String> = MutableLiveData()
+    private val needToShowAdditionalInfoMutableLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
+
+    val weatherLiveData: LiveData<WeatherToWeek> get() = mutableWeatherToWeekLiveData
+    val responseErrorLiveData get() = mutableResponseErrorLiveData
+    val needToShowAdditionalInfo get() = needToShowAdditionalInfoMutableLiveData
 
     init {
-        mutableLiveData.value = getWeather("Moscow")
+        getWeather()
+        getUnitOfMeasure()
     }
 
+    fun getWeather(cityName: String? = null) {
 
-    fun getWeather(cityname: String): WeatherToWeek {
-        return runBlocking {
+        viewModelScope.launch {
             try {
-                weatherRepository.getWeather(
-                    cityname
-                )
+                when (val response = weatherRepository.getWeather(cityName)) {
+                    is WeatherResult.Success -> {
+
+                        mutableWeatherToWeekLiveData.value = response.data
+
+                        cityName?.let {
+                            if (it.isBlank()) return@launch
+                            weatherRepository.saveCurrentCityToSharedPreference(it)
+                        }
+                    }
+                    is WeatherResult.Error -> {
+                        mutableResponseErrorLiveData.value = "${response.cod} ${response.message}"}
+                    }
             } catch (exception: Exception) {
-                //isFirstDownload = true
-                throw exception
+                if (exception is CancellableContinuation<*>) {
+                    throw exception
+                }
             }
         }
     }
-
 }

@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.fragments.WeatherFragment"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:id="@+id/settings"
     android:background="?android:attr/colorPrimary"
-    android:gravity="top"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="@string/settings"
+        android:textAlignment="center"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="24sp" />
 
     <Switch
         android:id="@+id/themecolor"
@@ -27,4 +34,13 @@
         android:textAlignment="center"
         android:textColor="@color/textColorPrimary"
         android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="@string/save_changes"
+        android:textColor="@color/textColorPrimary" />
 </LinearLayout>

@@ -27,9 +27,9 @@ object Mapper {
                 wind = item.value.wind.speed.windSpeedFromDoubleToInt(),
                 pressure = item.value.main.pressure,
                 clouds = item.value.clouds.all,
-                temp = item.value.main.temp.ConvertTempFromDoubleToInt(),
-                tempMax = item.value.main.tempMax.ConvertTempFromDoubleToInt(),
-                tempMin = item.value.main.tempMin.ConvertTempFromDoubleToInt()
+                temp = item.value.main.temp.convertTempFromDoubleToInt(),
+                tempMax = item.value.main.tempMax.convertTempFromDoubleToInt(),
+                tempMin = item.value.main.tempMin.convertTempFromDoubleToInt()
             )
             if (item.index < 8) {
                 firstDay.add(currentPartOfDay)
@@ -48,7 +48,7 @@ object Mapper {
         return WeatherToWeek(city = city.name, country = "", firstDay, weatherDayList)
     }
 
-    fun List<PartOfDay>.toWeatherDay(): WeatherDay =
+    private fun List<PartOfDay>.toWeatherDay(): WeatherDay =
         WeatherDay(
             currentDay = first().day,
             wind = maxOf { it.wind },
@@ -58,7 +58,7 @@ object Mapper {
             maxTemp = maxOf { it.tempMax }
         )
 
-    fun Double.ConvertTempFromDoubleToInt(): Int =
+    private fun Double.convertTempFromDoubleToInt(): Int =
         BigDecimal(this.toString()).setScale(0, RoundingMode.HALF_UP).toDouble().toInt()
 
 
@@ -111,7 +111,7 @@ object Mapper {
     return array
 }*/
 
-    fun Double.windSpeedFromDoubleToInt(): Int =
+    private fun Double.windSpeedFromDoubleToInt(): Int =
         BigDecimal(this.toString()).setScale(
             0,
             RoundingMode.HALF_UP

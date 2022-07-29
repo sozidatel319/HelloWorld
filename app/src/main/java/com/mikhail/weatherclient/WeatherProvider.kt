@@ -2,14 +2,11 @@ package com.mikhail.weatherclient
 
 import android.os.Handler
 import com.mikhail.weatherclient.Constants.MAXIMUM_DAYS_IN_LIST
-import com.mikhail.weatherclient.Utils.compareDates
-//import com.mikhail.weatherclient.Utils.mapToWeatherDayList
-import com.mikhail.weatherclient.data.WeatherDay
 import com.mikhail.weatherclient.model.WeatherModel
-import com.mikhail.weatherclient.presentation.City_changerPresenter
 import com.mikhail.weatherclient.data.network.weatherapi.RetrofitInstance
 import com.mikhail.weatherclient.data.network.weatherapi.WeatherApiService
 import kotlinx.coroutines.*
+import retrofit2.Response
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.ParseException
@@ -86,7 +83,7 @@ class WeatherProvider private constructor() {
     }
 
     @kotlin.jvm.Throws(Exception::class)
-    private fun getWeather(cityname: String): WeatherModel {
+    private fun getWeather(cityname: String): Response<WeatherModel> {
         return runBlocking {
             try {
                 weatherApi.getWeather(
@@ -139,7 +136,7 @@ class WeatherProvider private constructor() {
                         /*retrofit.create(
                             OpenWeather::class.java
                         )*/
-                        weatherModel = getWeather(City_changerPresenter.getInstance().cityName)
+                        //weatherModel = getWeather(City_changerPresenter.getInstance().cityName)
                         // } else{
                         // weatherByCoords = retrofit.create(OpenWeatherByCoords.class);
                         // weatherModel = getWeatherByCoords(City_changerPresenter.getInstance().getLat(), City_changerPresenter.getInstance().getLon());
@@ -183,7 +180,7 @@ class WeatherProvider private constructor() {
     val windSpeed: String
         get() {
             val windSpeed =
-                BigDecimal(java.lang.Double.toString(weatherModel!!.list!![0].wind!!.speed!!)).setScale(
+                BigDecimal(java.lang.Double.toString(weatherModel!!.list[0].wind.speed)).setScale(
                     0,
                     RoundingMode.HALF_UP
                 ).toDouble()
@@ -191,7 +188,7 @@ class WeatherProvider private constructor() {
         }
 
     fun tempMinToWeekInFahrenheit(): Array<String?> {
-        val result = arrayOfNulls<String>(weatherModel!!.list!!.size)
+        val result = arrayOfNulls<String>(weatherModel!!.list.size)
         var i = 0
         var j = 0
         while (j < result.size) {
@@ -206,7 +203,7 @@ class WeatherProvider private constructor() {
         var minTemp = 273.15
         var tempnow: Double
         for (i in counter until counter + 8) {
-            tempnow = weatherModel!!.list!![i].main!!.tempMin
+            tempnow = weatherModel!!.list[i].main.tempMin
             if (tempnow < minTemp) minTemp = tempnow
         }
         minTemp = (minTemp - 273.15) * 1.8000 + 32.00

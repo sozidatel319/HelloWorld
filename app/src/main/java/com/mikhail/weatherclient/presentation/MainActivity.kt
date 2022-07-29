@@ -1,10 +1,12 @@
 package com.mikhail.weatherclient.presentation
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mikhail.weatherclient.Constants
@@ -16,7 +18,7 @@ import com.mikhail.weatherclient.presentation.fragments.CityChangerFragment
 import com.mikhail.weatherclient.presentation.fragments.SettingsFragment
 import com.mikhail.weatherclient.presentation.viewmodel.MainViewModel
 
-class MainActivity : BaseActivity() {
+class MainActivity: AppCompatActivity(){
     var first = true
     var use_location = false
 

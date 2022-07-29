@@ -5,7 +5,7 @@
         <item>Yessentuki</item>
         <item>Moscow</item>
         <item>Pyatigorsk</item>
-        <item>Saint-Peterburg</item>
+        <item>Saint Petersburg</item>
     </string-array>
     <string name="weather">Clouds</string>
     <string name="enterCityName">Enter ciy name</string>

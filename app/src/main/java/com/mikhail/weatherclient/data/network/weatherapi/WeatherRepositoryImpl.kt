@@ -6,6 +6,7 @@ import com.mikhail.weatherclient.App
 import com.mikhail.weatherclient.Constants.CITY_NAME
 import com.mikhail.weatherclient.Constants.INFO
 import com.mikhail.weatherclient.Constants.MOSCOW
+import com.mikhail.weatherclient.Constants.NOW
 import com.mikhail.weatherclient.Constants.RESPONSE_UNIT_OF_MEASURE_CELSIUS
 import com.mikhail.weatherclient.Constants.RESPONSE_UNIT_OF_MEASURE_FAHRENHEIT
 import com.mikhail.weatherclient.Constants.UNIT_OF_MEASURE_FAHRENHEIT
@@ -19,7 +20,7 @@ class WeatherRepositoryImpl : WeatherRepository {
         RetrofitInstance.getInstance().create(WeatherApiService::class.java)
 
     private val sharedPreferences: SharedPreferences =
-        App.applicationContext().getSharedPreferences("now", Context.MODE_PRIVATE)
+        App.applicationContext().getSharedPreferences(NOW, Context.MODE_PRIVATE)
 
     override suspend fun getWeather(cityName: String?): WeatherResult {
 
@@ -36,7 +37,7 @@ class WeatherRepositoryImpl : WeatherRepository {
             }
         )
         return if (response.isSuccessful) {
-            WeatherResult.Success(response.body()!!.toWeatherToWeek())
+            WeatherResult.Success(response.body()?.toWeatherToWeek())
         } else {
             val message = response.raw()
             WeatherResult.Error(message.code, message.message)

@@ -9,7 +9,7 @@ sealed class WeatherResult {
         val message: String?
     ) : WeatherResult()
 
-    class Success(val data: WeatherToWeek) : WeatherResult()
+    class Success(val data: WeatherToWeek?) : WeatherResult()
 }
 
 

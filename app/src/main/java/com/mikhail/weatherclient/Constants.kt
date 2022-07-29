@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 
 object Constants {
+    const val NOW = "now"
     const val CITY_NAME = "cityname"
     const val INFO = "info"
     const val PRESSURE = "pressure"
